@@ -1,0 +1,196 @@
+{
+	"Protheus doc": {
+		"prefix": "protheusdoc",
+		"body": [
+			"//-------------------------------------------------------------------",
+			"/*/{Protheus.doc} ${1:function}",
+			"${2:description}",
+			"@author  ${3:author}",
+			"@since   ${4:date}",
+			"@version ${5:version}",
+			"/*/",
+			"//-------------------------------------------------------------------"
+		],
+		"description": "Protheus documentation."
+	},
+	"INCLUDE MVC": {
+		"prefix": "INCLUDE MVC",
+		"body": [
+			"#INCLUDE \"PROTHEUS.CH\"",
+			"#INCLUDE \"FWMVCDEF.CH\""
+		],
+		"description": "Inclui cabeçalhos do protheus e MVC."
+	},
+	"INCLUDE": {
+		"prefix": "INCLUDE",
+		"body": [
+			"#INCLUDE \"${1}.CH\""
+		],
+		"description": "Inclui cabeçalhos em branco."
+	},
+	"Help": {
+		"prefix": "Help",
+		"body": [
+			"HELP(\"\", 1, ${1:cabecalho},, ${2:descricao}, 2, 0,,,,,, ${3:solucao})"
+		],
+		"description": "Função de Help\nExemplo\nHELP(' ',1,'Help1' ,,'campo nao preenchido',2,0,,,,,, {'preencha o campo'})."
+	},
+	"Static Function": {
+		"prefix": "StaticFunction",
+		"body": [
+			"//-------------------------------------------------------------------",
+			"/*/{Protheus.doc} ${1:nomeStaticFunction}",
+			"${2:description}",
+			"@author  ${3:author}",
+			"@since   ${4:date}",
+			"@version ${5:version}",
+			"/*/",
+			"//-------------------------------------------------------------------",
+			"Static Function ${1:nomeStaticFunction}\n",
+			"Return ${8:return}"
+		],
+		"description": "Declaração de uma Static Function com o Protheus.doc"
+	},
+	"Function": {
+		"prefix": "Function",
+		"body": [
+			"//-------------------------------------------------------------------",
+			"/*/{Protheus.doc} ${1:nomeFunction}",
+			"${2:description}",
+			"@author  ${3:author}",
+			"@since   ${4:date}",
+			"@version ${5:version}",
+			"/*/",
+			"//-------------------------------------------------------------------",
+			"Function ${1:nomeFunction}\n",
+			"Return ${8:return}"
+		],
+		"description": "Declaração de uma Function com o Protheus.doc"
+	},
+	"Browse": {
+		"prefix": "FWMBrowse",
+		"body": [
+			"Local ${1:oBrowse} := FWMBrowse():New()",
+			"${1:oBrowse}:SetAlias(\"${2:table}\")",
+			"${1:oBrowse}:SetDescription(\"${3:description}\")",
+			"${1:oBrowse}:DisableDetails()",
+			"${1:oBrowse}:Activate()"
+		],
+		"description": "Instância um objeto da classe FWMBrowse."
+	},
+	"MenuDef()": {
+		"prefix": "MenuDef()",
+		"body": [
+			"//-------------------------------------------------------------------",
+			"/*/{Protheus.doc} MenuDef()",
+			"${1:description}",
+			"@author  ${2:author}",
+			"@since   ${3:date}",
+			"@version ${4:version}",
+			"/*/",
+			"//-------------------------------------------------------------------",
+			"Static Function MenuDef()\n",
+			"Local ${5:aRotina} := {}\n",
+			"ADD OPTION ${5:aRotina} TITLE \"Visualizar\" ACTION \"VIEWDEF.${6:SourceName}\" OPERATION 2 ACCESS 0 // Visualizar",
+			"ADD OPTION ${5:aRotina} TITLE \"Incluir\"    ACTION \"VIEWDEF.${6:SourceName}\" OPERATION 3 ACCESS 0 // Incluir",
+			"ADD OPTION ${5:aRotina} TITLE \"Alterar\"    ACTION \"VIEWDEF.${6:SourceName}\" OPERATION 4 ACCESS 0 // Alterar",
+			"ADD OPTION ${5:aRotina} TITLE \"Excluir\"    ACTION \"VIEWDEF.${6:SourceName}\" OPERATION 5 ACCESS 0 // Excluir\n",
+			"Return ${5:aRotina}"
+		],
+		"description": "Define menu da rotina."
+	},
+	"ModelDef()": {
+		"prefix": "ModelDef()",
+		"body": [
+			"//-------------------------------------------------------------------",
+			"/*/{Protheus.doc} ModelDef()",
+			"${1:description}",
+			"@author  ${2:author}",
+			"@since   ${3:date}",
+			"@version ${4:version}",
+			"/*/",
+			"//-------------------------------------------------------------------",
+			"Static Function ModelDef()\n",
+			"Local ${5:oStru}  := FWFormStruct(1,\"${6:table}\")",
+			"Local ${7:oModel} := MPFormModel():New(\"${8:SourceName}\",/*bPreValidMdl*/, /*bPosValidMdl*/, /*bCommit*/, /*bCancel*/ )\n",
+			"${7:oModel}:SetDescription(\"${9:Description}\")",
+			"${7:oModel}:AddFields(\"${10:FIELD}\",,${5:oStru})\n",
+			"Return ${7:oModel}"
+		],
+		"description": "Inclui o ModelDef no fonte."
+	},
+	"ViewDef()": {
+		"prefix": "ViewDef()",
+		"body": [
+			"//-------------------------------------------------------------------",
+			"/*/{Protheus.doc} ViewDef()",
+			"${1:description}",
+			"@author  ${2:author}",
+			"@since   ${3:date}",
+			"@version ${4:version}",
+			"/*/",
+			"//-------------------------------------------------------------------",
+			"Static Function ViewDef()\n",
+			"Local ${5:oView}",
+			"Local ${6:oModel} := ModelDef()",
+			"Local ${7:oStru} := FWFormStruct(2, \"${8:table}\")\n",
+			"${5:oView} := FWFormView():New()\n",
+			"${5:oView}:SetModel(${6:oModel})",
+			"${5:oView}:AddField(\"${9:VIEW}\", ${7:oStru}, \"${10:FIELD}\")\n",
+			"${5:oView}:CreateHorizontalBox(\"${11:BOX}\", ${12:size})",
+			"${5:oView}:SetOwnerView(\"${9:VIEW}\",\"${11:BOX}\")\n",
+			"Return ${5:oView}"
+		],
+		"description": "Inclui o ViewDef no fonte."
+	},
+	"AddTrigger": {
+		"prefix": "AddTrigger",
+		"body": [
+			"${1:oStru}:AddTrigger(\"${2:origem}\"  , ;",
+			"\t\t\t\t\t\"${3:destino}\"  , ;",
+			"\t\t\t\t\t{ || ${4:.T.} }    , ;",
+			"\t\t\t\t\t{ || ${5:function}() } )"
+		],
+		"description": "FWFORMMODELSTRUCT():AddTrigger(<cIdField>, <cTargetIdField>, [bPre], <bSetValue>) -> NIL\ncIdField - Id do campo de origem (Obrigatório)\ncTargetIdField - Id do campo de destino(Obrigatório)\nbPre - Bloco de codigo de validação da execução do gatilho (Opcional)\nbSetValue - Bloco de código de execução do gatilho (Obrigatório)"
+	},
+	"GetModel": {
+		"prefix": "GetModel",
+		"body": "${1:oModel}:GetModel(\"${2:cIDSubModel}\")",
+		"description": "FWFORMVIEW():GetModel([cIDSubModel])-> oRetorno\ncIDSubModel - ID do submodelo (Obrigatório)"
+	},
+	"SetValue": {
+		"prefix": "SetValue",
+		"body": "${1:oField}:SetValue(\"${2:cId}\", \"${3:xValue}\")",
+		"description": "FWFORMFIELDSMODEL():SetValue(<cId>, [xValue])-> lAtribuido\ncId - ID do submodelo (Obrigatório)\nxValue - Valor a ser atríbuido (Opcional)"
+	},
+	"Posicione": {
+		"prefix": "Posicione",
+		"body": "Posicione(\"${1:cAlias}\", ${2:nOrdem}, ${3:cChave}, \"${4:cCampo}\")",
+		"description": "Posicione(<cAlias>, <nOrdem>, <cChave>, <cCampo>)\ncAlias - Campo que será retornado (Obrigatório)\nnOrdem - Índice da pesquisa (Obrigatório)\ncChave - Chave da pesquisa (Obrigatório)\ncCampo - Campo retornado (Obrigatório)"
+	},
+	"xFilial": {
+		"prefix": "xFilial",
+		"body": "xFilial(\"${1:cAlias}\")",
+		"description": "xFilial(<cAlias>)\ncAlias - Nome da tabela (Obrigatório)"
+	},
+	"FWFldGet": {
+		"prefix": "FWFldGet",
+		"body": "FWFldGet(\"${1:cCampo}\")",
+		"description": "FWFldGet(<cCampo>, [nLinha], [oModel], [lShowMsg])-> xRet\ncCampo - Nome do campo (Obrigatório)\nnLinha - Número da linha para GRID (Opcional)\noModel - Modelo de dados (Opcional)\nlShowMsg - Exibe mensagem de erro (Opcional)"
+	},
+	"IF": {
+		"prefix": "IF",
+		"body": "IF (${1:condition})\n\t${2:code}\nENDIF",
+		"description": "IF statement block."
+	},
+	"IFELSE": {
+		"prefix": "IFELSE",
+		"body": "IF (${1:condition})\n\t${2:code}\nELSE\n\t${3:code}\nENDIF",
+		"description": "IFELSE statement block."
+	},
+	"ELSEIF": {
+		"prefix": "ELSEIF",
+		"body": "IF (${1:condition})\n\t${2:code}\nELSEIF (${3:condition})\n\t${4:code}\nENDIF",
+		"description": "ELSEIF statement block."
+	}
+}
